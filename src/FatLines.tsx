@@ -1,6 +1,6 @@
 /** @jsxImportSource @woby/three */
 
-// import { Canvas3D, useFrame, useRenderer, useCamera, useThree, Line, LineProps } from '@woby/three"
+// import { Canvas3D, useFrame, useRenderer, useCamera, useThree, Line, LineProps } from '@woby/three'
 import { $, $$, useEffect, } from "woby"
 
 import * as GeometryUtils from 'three/examples/jsm/utils/GeometryUtils'

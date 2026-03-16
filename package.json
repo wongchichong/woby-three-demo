@@ -44,7 +44,11 @@
     "build:vite": "vite build",
     "build:watch": "vite build --watch",
     "preview": "vite preview --host",
-    "hosting": "firebase deploy --only hosting"
+    "hosting": "firebase deploy --only hosting",
+    "commit": "cz",
+    "changelog": "git-cliff -o CHANGELOG.md",
+    "release:automatic": "semantic-release --extends ../semantic-release.config.js",
+    "commit:help": "echo 'Usage: pnpm run commit' && echo 'This will start the commitizen wizard to create a conventional commit.' && echo 'Follow the prompts to enter commit type, scope, and message.'"
   },
   "repository": {
     "type": "git",
@@ -73,5 +77,12 @@
     "@woby/use": "workspace:../use",
     "woby": "workspace:../woby",
     "@woby/three": "workspace:../three"
+  },
+  "pnpm": {
+    "overrides": {
+      "woby": "workspace:../woby",
+      "@woby/styled": "workspace:../styled",
+      "@woby/use": "workspace:../use"
+    }
   }
 }

@@ -10,11 +10,15 @@ import { CSS2DRenderer } from '@woby/three/examples/jsm/renderers/CSS2DRenderer'
 import { WebGLRenderer } from '@woby/three/src/renderers/WebGLRenderer'
 import { Color } from '@woby/three/src/math/Color'
 import { DoubleSide } from '@woby/three/src/constants'
-import { PerspectiveCamera, Scene, Vector2, Vector3 } from "three"
+// import * as THREE from "three"
 import '@woby/three/examples/jsm/controls/OrbitControls'
 import '@woby/three/examples/jsm/renderers/CSS2DRenderer'
 import { Event } from '@woby/three/lib/components/Event'
 
+import { PerspectiveCamera } from 'three/src/cameras/PerspectiveCamera'
+import { Scene } from 'three/src/scenes/Scene'
+import { Vector2 } from 'three/src/math/Vector2'
+import { Vector3 } from 'three/src/math/Vector3'
 
 function Box(props: MeshProps) {
     const texture = new TextureLoader().load('../textures/usedSteel.png')

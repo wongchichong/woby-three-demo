@@ -11,6 +11,7 @@ import { BoxGeometry } from '@woby/three/src/geometries/BoxGeometry'
 import { BackSide } from '@woby/three/src/constants'
 import { Color } from '@woby/three/src/math/Color'
 import { Event } from '@woby/three/lib/components/Event'
+import type { Scene } from "@woby/three/src/scenes/Scene"
 
 function Box(props: MeshProps) {
     // This reference gives us direct access to the THREE.Mesh object
@@ -42,9 +43,12 @@ export function Box2Click() {
         side: BackSide,
     })
 
+    const scene = $<Scene>()
+        ; (window as any).scene = scene
+
     return <Canvas3D>
         <webglRenderer antialias setPixelRatio={[window.devicePixelRatio]} setSize={[window.innerWidth, window.innerHeight]} shadowMap-enabled={true} />
-        <scene background={new Color('gray')}>
+        <scene ref={scene} background={new Color('gray')}>
             <ambientLight intensity={0.5} />
             <spotLight position={[0, 0, 0]} angle={0.15} penumbra={1} />
             <pointLight position={[0, 5, 0]} intensity={10} castShadow shadow-camera-far={333} shadow-camera-near={0.1} />

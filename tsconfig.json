@@ -12,7 +12,7 @@
         "inlineSourceMap": false,
         "inlineSources": false,
         // "isolatedModules": true,
-        "jsx": "preserve",
+        "jsx": "react-jsx",
         "jsxImportSource": "@woby/three",
         "lib": [
             "dom",

@@ -20,7 +20,7 @@ import { toColor } from '@woby/three/lib/utils'
 import '@woby/three/examples/jsm/renderers/CSS3DRenderer'
 import '@woby/three/examples/jsm/controls/TrackballControls'
 import { CSS3DObject, CSS3DRenderer } from '@woby/three/examples/jsm/renderers/CSS3DRenderer'
-import { $, $$, useEffect, createComment, type JSX, createElement, setRef } from '@woby/three'
+import { $, $$, useEffect, type JSX, createElement, setRef } from 'woby'
 import { Vector3 } from '@woby/three/src/math/Vector3'
 import { Object3D, Object3DProps } from '@woby/three/src/core/Object3D'
 import { PerspectiveCamera } from '@woby/three/src/cameras/PerspectiveCamera'
@@ -375,7 +375,7 @@ export const WebGLCss3d = () => {
     })
 
     useEffect(() => {
-        if (!$(light)) return
+        if (!$$(light)) return
 
         $$(light).shadow.mapSize.width = 1024
         $$(light).shadow.mapSize.height = 1024

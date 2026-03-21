@@ -25,7 +25,7 @@ import { toColor } from '@woby/three/lib/utils'
 import '@woby/three/examples/jsm/renderers/CSS3DRenderer'
 import '@woby/three/examples/jsm/controls/TrackballControls'
 import { CSS3DObject, CSS3DRenderer } from '@woby/three/examples/jsm/renderers/CSS3DRenderer'
-import { $, $$, useEffect, type JSX } from '@woby/three'
+import { $, $$, useEffect, type JSX } from 'woby'
 import { Vector3 } from '@woby/three/src/math/Vector3'
 import { Object3D } from '@woby/three/src/core/Object3D'
 import { PerspectiveCamera } from '@woby/three/src/cameras/PerspectiveCamera'
@@ -313,7 +313,7 @@ export const Css3dPeriodictable = () => {
 
     //object loaded
     useEffect(() => {
-        if (!$(camera))
+        if (!$$(camera))
             return
 
         transform(targets.table, 2000)
@@ -572,7 +572,7 @@ export const Css3dPeriodictable = () => {
     return <Canvas3D>
         <webglRenderer antialias setPixelRatio={[window.devicePixelRatio]} setSize={[1, 1]} />
         {/* {() => $(renderer)?.domElement} */}
-        <css3dRenderer ref={css3d} setSize={() => [$(width), $(height)]} >
+        <css3dRenderer ref={css3d} setSize={[$$(width), $$(height)]} >
             <scene ref={scene}>
                 <ambientLight intensity={0.5} />
                 {objs}

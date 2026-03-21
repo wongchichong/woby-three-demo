@@ -5,6 +5,7 @@ import './input.css'
 
 import { Plane3 } from './Plane'
 import { Box3 } from './Box3'
+import { Box3ce } from './Box3ce'
 import { BoxStaticText } from './BoxStaticText'
 import { GLTF } from './GLTF'
 import { GltfAnisotropy } from './GltfAnisotropy'
@@ -25,6 +26,7 @@ export const App = () => {
     return <div class='z-10'>
         <button onClick={() => page(Plane3)}>Plane</button>
         <button onClick={() => page(Box3)}>3 Boxes + Click</button>
+        <button onClick={() => page(Box3ce)}>3 Boxes + Click (Custom Element)</button>
         <button onClick={() => page(BoxStaticText)}>Box + static text</button>
         <button onClick={() => page(GLTF)}>GLTF</button>
         <button onClick={() => page(GltfAnisotropy)}>Gltf Anisotropy</button>

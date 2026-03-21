@@ -1,6 +1,6 @@
 {
   "name": "@woby/three-demo",
-  "version": "1.0.5",
+  "version": "1.0.18",
   "publishConfig": {
     "access": "public"
   },
@@ -27,28 +27,23 @@
     }
   },
   "scripts": {
-    "git": "git add . && git commit -m \"Bump version\" && git push",
-    "bump": "pnpm version patch",
-    "npmjs": "pnpm publish",
-    "release": "run-s -c git bump npmjs",
-    "css:watch": "tailwindcss -i ./src/input.css -o ./public/output.css --watch",
-    "css11": "tailwindcss -i ./src/input.css -o ./public/output.css",
+    "bump": "pnpm version patch --no-git-tag-version",
+    "push": "git push && git push --tags",
+    "npmjs": "pnpm publish --access public",
+    "commit": "pnpm git && pnpm bump && pnpm push",
+    "release": "run-s -c commit npmjs",
     "declaration": "tsc --build --force --declaration --emitDeclarationOnly --declarationMap  --verbose",
     "declaration:watch": "tsc --build --force --declaration --emitDeclarationOnly --declarationMap  --verbose --watch",
     "watch": "run-p build:watch css:watch",
-    "build": "run-s build:vite declaration",
-    "build:web": "vite build --config=vite.config.web.mts --force --mode production",
+    "build": "run-s build:vite && pnpm bump",
+    "build:web": "vite build --config=vite.config.web.mts --mode production",
     "web": "vite preview --config=vite.config.web.mts --host",
     "dev:only": "vite --config=vite.config.web.mts --force --mode dev --host",
-    "dev": "run-p css:watch dev:only",
+    "dev": "run-p dev:only",
     "build:vite": "vite build",
     "build:watch": "vite build --watch",
     "preview": "vite preview --host",
-    "hosting": "firebase deploy --only hosting",
-    "commit": "cz",
-    "changelog": "git-cliff -o CHANGELOG.md",
-    "release:automatic": "semantic-release --extends ../semantic-release.config.js",
-    "commit:help": "echo 'Usage: pnpm run commit' && echo 'This will start the commitizen wizard to create a conventional commit.' && echo 'Follow the prompts to enter commit type, scope, and message.'"
+    "hosting": "firebase deploy --only hosting"
   },
   "repository": {
     "type": "git",
@@ -62,27 +57,25 @@
   "author": "Tan Jee Han",
   "license": "MIT",
   "devDependencies": {
+    "@playwright/test": "^1.56.1",
     "@rollup/plugin-alias": "^5.1.1",
-    "autoprefixer": "^10.4.20",
-    "tailwindcss": "^4.0.17",
     "@tailwindcss/vite": "^4.0.6",
+    "@types/node": "^24.10.1",
+    "autoprefixer": "^10.4.20",
+    "playwright": "^1.56.1",
+    "tailwindcss": "^4.0.17",
     "vite": "^6.1.0",
     "vite-plugin-dts": "^4.5.0",
     "vite-plugin-static-copy": "^2.2.0",
     "vite-tsconfig-paths": "^5.1.4"
   },
   "dependencies": {
+    "@tailwindcss/postcss": "^4.1.18",
     "@types/three": "^0.173.0",
-    "three": "^0.173.0",
+    "@woby/three": "workspace:../three",
     "@woby/use": "workspace:../use",
-    "woby": "workspace:../woby",
-    "@woby/three": "workspace:../three"
-  },
-  "pnpm": {
-    "overrides": {
-      "woby": "workspace:../woby",
-      "@woby/styled": "workspace:../styled",
-      "@woby/use": "workspace:../use"
-    }
+    "postcss": "^8.5.6",
+    "three": "^0.173.0",
+    "woby": "workspace:../woby"
   }
 }

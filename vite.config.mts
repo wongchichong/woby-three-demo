@@ -35,11 +35,11 @@ const config = defineConfig({
     ],
     resolve: {
         alias: {
-            '@woby/three/jsx-runtime': path.resolve('../three/lib/jsx/jsx-runtime.js'),
-            '@woby/three/jsx-dev-runtime': path.resolve('../three/lib/jsx/jsx-dev-runtime.js'),
-            '@woby/three/src': path.resolve('../three/src'),
-            '@woby/three/lib': path.resolve('../three/lib'),
-            '@woby/three/examples/jsm': path.resolve('../three/examples/jsm'),
+            '@woby/three/jsx-runtime': path.resolve('../three/dist/jsx-runtime.es.js'),
+            '@woby/three/jsx-dev-runtime': path.resolve('../three/dist/jsx-dev-runtime.es.js'),
+            '@woby/three/src': path.resolve('../three/code/src'),
+            '@woby/three/lib': path.resolve('../three/code/lib'),
+            '@woby/three/examples/jsm': path.resolve('../three/code/examples/jsm'),
             'woby/jsx-runtime': process.argv.includes('dev') ? path.resolve('../woby/src/jsx/runtime') : 'woby',
             'woby/jsx-dev-runtime': process.argv.includes('dev') ? path.resolve('../woby/src/jsx/runtime') : 'woby',
             'woby': process.argv.includes('dev') ? path.resolve('../woby/src/index') : 'woby',

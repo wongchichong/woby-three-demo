@@ -21,6 +21,7 @@ import '@woby/three/src/renderers/WebGLRenderer'
 import "@woby/three/src/cameras/PerspectiveCamera"
 import { DoubleSide } from "three/src/constants"
 import { useLoader } from '@woby/three/lib/hooks/useLoader'
+import type { Scene } from "@woby/three/src/scenes/Scene"
 
 const Plane = (props: MeshProps) => {
     const texture = new TextureLoader().load('../textures/usedSteel.png')
@@ -47,9 +48,15 @@ const Plane = (props: MeshProps) => {
 export const Plane3 = () => {
     const visible = $(false)
     const box = <Plane position={[0, 1, 0]} />
+
+    const scene = $<Scene>()
+
+        ; (window as any).scene = scene
+
+
     return <Canvas3D>
         <webglRenderer antialias setPixelRatio={[window.devicePixelRatio]} setSize={[window.innerWidth, window.innerHeight]} />
-        <scene background={toColor('white')}>
+        <scene ref={scene} background={toColor('white')}>
             <ambientLight intensity={1} />
             <spotLight position={[0, 1, 0]} angle={10} penumbra={1} />
             <pointLight position={[0, 1, 0]} />

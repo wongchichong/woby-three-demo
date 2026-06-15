@@ -1,6 +1,6 @@
 /** @jsxImportSource woby */
 
-import { $, $$, type Observable, useEffect, useRef } from 'woby'
+import { $, $$, type Observable, useEffect } from 'woby'
 import { categories, type DemoEntry, type CategoryEntry } from '../registry'
 import { SearchBar } from './SearchBar'
 import { CategoryGroup } from './CategoryGroup'
@@ -12,7 +12,7 @@ export const Sidebar = (props: {
     const { activeDemo, searchQuery } = props
 
     // Preserve scroll position
-    const scrollContainerRef = useRef<HTMLDivElement>(null)
+    const scrollContainerRef = $<HTMLDivElement | null>(null)
     const savedScrollTop = $(0)
 
     const filteredCategories = () => {
@@ -32,8 +32,9 @@ export const Sidebar = (props: {
 
     const handleDemoSelect = (demo: DemoEntry) => {
         // Save scroll position before changing demo
-        if (scrollContainerRef.current) {
-            savedScrollTop(scrollContainerRef.current.scrollTop)
+        const container = $$(scrollContainerRef)
+        if (container) {
+            savedScrollTop(container.scrollTop)
         }
         activeDemo(demo)
         // Update URL hash
@@ -42,13 +43,15 @@ export const Sidebar = (props: {
 
     // Restore scroll position after render
     useEffect(() => {
-        if (scrollContainerRef.current) {
+        const container = $$(scrollContainerRef)
+        if (container) {
             const saved = $$(savedScrollTop)
             if (saved > 0) {
                 // Use requestAnimationFrame to ensure DOM is ready
                 requestAnimationFrame(() => {
-                    if (scrollContainerRef.current) {
-                        scrollContainerRef.current.scrollTop = saved
+                    const el = $$(scrollContainerRef)
+                    if (el) {
+                        el.scrollTop = saved
                     }
                 })
             }
@@ -67,7 +70,7 @@ export const Sidebar = (props: {
             <SearchBar value={searchQuery} />
 
             {/* Demo List */}
-            <div ref={scrollContainerRef} style="flex: 1; overflow-y: auto; padding: 0 0.75rem; padding-top: 0.5rem; padding-bottom: 0.5rem;">
+            <div ref={(el: HTMLDivElement | null) => { if (el) scrollContainerRef(el) }} style="flex: 1; overflow-y: auto; padding: 0 0.75rem; padding-top: 0.5rem; padding-bottom: 0.5rem;">
                 {() => filteredCategories().map(category => (
                     <CategoryGroup
                         category={category}

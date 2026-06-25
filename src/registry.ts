@@ -338,6 +338,7 @@ export const categories: CategoryEntry[] = [
             { id: 'webgl_loader_texture_hdr', name: 'HDR Texture', category: 'textures', component: () => import('./WebGLLoaderTextureHDR') },
             { id: 'webgl_loader_texture_dds', name: 'DDS Texture', category: 'textures', component: () => import('./WebGLLoaderTextureDDS') },
             { id: 'webgl_loader_texture_tga', name: 'TGA Texture', category: 'textures', component: () => import('./WebGLLoaderTextureTGA') },
+            { id: 'webgl_loader_texture_ktx2', name: 'KTX2 Texture (Basis)', category: 'textures', component: () => import('./WebGLLoaderTextureKTX2') },
             { id: 'webgl_texture_uv', name: 'UV Mapping', category: 'textures', component: () => import('./WebGLTextureUV') },
             { id: 'webgl_texture_offset', name: 'Texture Offset', category: 'textures', component: () => import('./WebGLTextureOffset') },
             { id: 'webgl_texture_projection', name: 'Texture Projection', category: 'textures', component: () => import('./WebGLTextureProjection') },
@@ -444,6 +445,7 @@ export const categories: CategoryEntry[] = [
             { id: 'webgl_shadows_contact_soft', name: 'Soft Contact Shadows', category: 'shadows', component: () => import('./WebGLShadowsContactSoft') },
             { id: 'webgl_shadow_pcss', name: 'PCSS Soft Shadows', category: 'shadows', component: () => import('./WebGLShadowPCSS') },
             { id: 'webgl_shadowmap_pcss', name: 'Shadowmap PCSS', category: 'shadows', component: () => import('./WebGLShadowmapPCSS') },
+            { id: 'webgl_shadowmap_progressive', name: 'Progressive Lightmap', category: 'shadows', component: () => import('./WebGLShadowmapProgressive') },
             { id: 'webgl_shadow_vsm', name: 'VSM Shadows', category: 'shadows', component: () => import('./WebGLShadowVSM') },
         ]
     },

@@ -674,6 +674,7 @@ export const categories: CategoryEntry[] = [
             { id: 'webgl_interactive_draggablecubes', name: 'Draggable Cubes', category: 'interactive', component: () => import('./WebGLInteractiveDrag') },
             { id: 'webgl_interactive_pick', name: 'Object Picking', category: 'interactive', component: () => import('./WebGLInteractivePick') },
             { id: 'webgl_raycaster', name: 'Raycaster Spheres', category: 'interactive', component: () => import('./WebGLRaycaster') },
+            { id: 'webgl_raycast_sprite', name: 'Raycast Sprite', category: 'interactive', component: () => import('./WebGLRaycastSprite') },
         ]
     },
     {

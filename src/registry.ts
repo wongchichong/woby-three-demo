@@ -485,6 +485,7 @@ export const categories: CategoryEntry[] = [
             { id: 'webgl_camera_path', name: 'Camera Path', category: 'cameras', component: () => import('./WebGLCameraPath') },
             { id: 'webgl_camera_zoom', name: 'Camera Zoom vs Dolly', category: 'cameras', component: () => import('./WebGLCameraZoom') },
             { id: 'webgl_multiple_views', name: 'Multiple Views (Split Screen)', category: 'cameras', component: () => import('./WebGLMultipleViews') },
+            { id: 'webgl_multiple_elements_text', name: 'Multiple Elements + Text', category: 'cameras', component: () => import('./WebGLMultipleElementsText') },
         ]
     },
     {

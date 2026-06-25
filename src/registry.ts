@@ -40,8 +40,11 @@ export const categories: CategoryEntry[] = [
             { id: 'webgl_fat_lines_advanced', name: 'Fat Lines Advanced', category: 'lines', component: () => import('./WebGLFatLines') },
             { id: 'webgl_lines', name: 'Lines', category: 'lines', component: () => import('./WebGLLines') },
             { id: 'webgl_lines_dashed', name: 'Dashed Lines', category: 'lines', component: () => import('./WebGLLinesDashed') },
-            { id: 'webgl_lines_fat', name: 'Fat Lines (Line2)', category: 'lines', component: () => import('./WebGLLinesLineMaterial') },
+            { id: 'webgl_lines_fat', name: 'Fat Lines (Line2)', category: 'lines', component: () => import('./WebGLLinesFat') },
             { id: 'webgl_lines_fat_wireframe', name: 'Fat Wireframe', category: 'lines', component: () => import('./WebGLLinesLineMaterialWireframe') },
+            { id: 'webgl_lines_fat_raycasting', name: 'Fat Lines Raycasting', category: 'lines', component: () => import('./WebGLLinesFatRaycasting') },
+            { id: 'webgl_lines_linematerial', name: 'LineMaterial Helix', category: 'lines', component: () => import('./WebGLLinesLineMaterial') },
+            { id: 'webgl_lines_colors', name: 'Lines Colors', category: 'lines', component: () => import('./WebGLLinesColors') },
             { id: 'webgl_lines_sphere', name: 'Lines Sphere', category: 'lines', component: () => import('./WebGLLinesSphere') },
             { id: 'webgl_buffergeometry_lines_indexed', name: 'BufferGeometry Lines Indexed', category: 'lines', component: () => import('./WebGLBufferGeometryLinesIndexed') },
         ]
@@ -68,7 +71,8 @@ export const categories: CategoryEntry[] = [
             { id: 'webgl_animation_particles', name: 'Animation Particles', category: 'animation', component: () => import('./AnimationParticles') },
             { id: 'webgl_animation_keyframes', name: 'Animation Keyframes', category: 'animation', component: () => import('./AnimationKeyframes') },
             { id: 'webgl_animation_skinning', name: 'Animation Skinning', category: 'animation', component: () => import('./AnimationSkinning') },
-            { id: 'webgl_morph_targets', name: 'Morph Targets', category: 'animation', component: () => import('./WebGLMorphTargets') },
+            { id: 'webgl_morph_targets', name: 'Morph Targets', category: 'animation', component: () => import('./WebGLAnimationMorphTargets') },
+            { id: 'webgl_animation_water_ripple', name: 'Water Ripple', category: 'animation', component: () => import('./WebGLAnimationWaterRipple') },
             { id: 'webgl_animation_skinning_blending', name: 'Skinning Blending', category: 'animation', component: () => import('./WebGLAnimationSkinningBlending') },
             { id: 'webgl_animation_skinning_additive_blending', name: 'Additive Blending', category: 'animation', component: () => import('./WebGLAnimationSkinningAdditiveBlending') },
             { id: 'webgl_animation_skinning_morph', name: 'Skinning Morph', category: 'animation', component: () => import('./WebGLAnimationSkinningMorph') },
@@ -84,6 +88,7 @@ export const categories: CategoryEntry[] = [
             { id: 'webgl_morphtargets_sphere', name: 'Morph Targets Sphere', category: 'animation', component: () => import('./WebGLMorphTargetsSphere') },
             { id: 'webgl_morphtargets_flamingo', name: 'Morph Targets Flamingo', category: 'animation', component: () => import('./WebGLMorphTargetsFlamingo') },
             { id: 'webgl_morphtargets_horse', name: 'Morph Targets Horse', category: 'animation', component: () => import('./WebGLMorphTargetsHorse') },
+            { id: 'webgl_morphtargets_prog', name: 'Morph Targets Programmatic', category: 'animation', component: () => import('./WebGLMorphTargets') },
             { id: 'webgl_animation_walk_blend', name: 'Walk Cycle Blend', category: 'animation', component: () => import('./WebGLAnimationWalkBlend') },
             { id: 'webgl_animation_cloth', name: 'Cloth Simulation', category: 'animation', component: () => import('./WebGLAnimationCloth') },
             { id: 'webgl_animation_cloth2', name: 'Cloth Flag', category: 'animation', component: () => import('./WebGLAnimationCloth2') },
@@ -120,9 +125,12 @@ export const categories: CategoryEntry[] = [
             { id: 'webgl_geometry_csg', name: 'CSG Geometry', category: 'geometries', component: () => import('./WebGLGeometryCSG') },
             { id: 'webgl_geometry_colors', name: 'Vertex Colors', category: 'geometries', component: () => import('./WebGLGeometryColors') },
             { id: 'webgl_geometry_colors_lut', name: 'Color Lookup Table', category: 'geometries', component: () => import('./WebGLGeometryColorsLookuptable') },
+            { id: 'webgl_geometry_colors_lookuptable', name: 'LUT Colored Sphere (JSX)', category: 'geometries', component: () => import('./WebGLGeometryColorLookupTable') },
             { id: 'webgl_geometry_minecraft', name: 'Minecraft Terrain', category: 'geometries', component: () => import('./WebGLGeometryMinecraft') },
             { id: 'webgl_geometry_spline_editor', name: 'Spline Editor', category: 'geometries', component: () => import('./WebGLGeometrySplineEditor') },
             { id: 'webgl_geometry_spline_tube', name: 'Spline Tube Path', category: 'geometries', component: () => import('./WebGLGeometrySpline') },
+            { id: 'webgl_geometry_text', name: '3D Text', category: 'geometries', component: () => import('./WebGLGeometryText') },
+            { id: 'webgl_geometry_text_shapes', name: 'Text Shapes', category: 'geometries', component: () => import('./WebGLGeometryTextShapes') },
             { id: 'webgl_geometry_text_stroke', name: 'Text Stroke', category: 'geometries', component: () => import('./WebGLGeometryTextStroke') },
             { id: 'webgl_geometry_nurbs', name: 'NURBS', category: 'geometries', component: () => import('./WebGLGeometryNurbs') },
             { id: 'webgl_geometry_dynamic', name: 'Dynamic Geometry', category: 'geometries', component: () => import('./WebGLGeometryDynamic') },
@@ -133,7 +141,8 @@ export const categories: CategoryEntry[] = [
             { id: 'webgl_geometry_normals', name: 'Vertex Normals', category: 'geometries', component: () => import('./WebGLGeometryNormals') },
             { id: 'webgl_geometry_terrain', name: 'Procedural Terrain', category: 'geometries', component: () => import('./WebGLGeometryTerrain') },
             { id: 'webgl_geometry_procedural', name: 'Procedural Spiral', category: 'geometries', component: () => import('./WebGLGeometryProcedural') },
-            { id: 'webgl_morphtargets', name: 'Morph Targets', category: 'geometries', component: () => import('./WebGLMorphTargets') },
+            { id: 'webgl_morphtargets', name: 'Morph Targets', category: 'geometries', component: () => import('./WebGLAnimationMorphTargets') },
+            { id: 'webgl_geometry_gyroscope', name: 'Gyroscope', category: 'geometries', component: () => import('./WebGLGeometryGyroscope') },
             { id: 'webgl_geometry_morph', name: 'Morph Targets', category: 'geometries', component: () => import('./WebGLGeometryMorph') },
             { id: 'webgl_geometry_polyhedra', name: 'Platonic & Archimedean Solids', category: 'geometries', component: () => import('./WebGLGeometryPolyhedra') },
             { id: 'webgl_geometry_stellated', name: 'Stellated Icosahedron', category: 'geometries', component: () => import('./WebGLGeometryStellated') },
@@ -233,6 +242,7 @@ export const categories: CategoryEntry[] = [
             { id: 'webgl_geometry_loft', name: 'Loft Geometry', category: 'geometries', component: () => import('./WebGLGeometryLoft') },
             { id: 'webgl_geometry_sweep', name: 'Sweep Geometry', category: 'geometries', component: () => import('./WebGLGeometrySweep') },
             { id: 'webgl_geometry_skinning', name: 'Geometry Skinning', category: 'geometries', component: () => import('./WebGLGeometrySkinning') },
+            { id: 'webgl_vertices', name: 'Vertex Displacement Wave', category: 'geometries', component: () => import('./WebGLVertices') },
         ]
     },
     {
@@ -289,10 +299,19 @@ export const categories: CategoryEntry[] = [
             { id: 'webgl_materials_procedural', name: 'Procedural Materials', category: 'materials', component: () => import('./WebGLMaterialsProcedural') },
             { id: 'webgl_materials_skin', name: 'Skin SSS Approximation', category: 'materials', component: () => import('./WebGLMaterialsSkin') },
             { id: 'webgl_materials_texture', name: 'Texture Mapping', category: 'materials', component: () => import('./WebGLMaterialsTexture') },
+            { id: 'webgl_materials_texture_canvas', name: 'Canvas Clock Texture', category: 'materials', component: () => import('./WebGLTextureCanvas2') },
             { id: 'webgl_materials_blend', name: 'Material Blending', category: 'materials', component: () => import('./WebGLMaterialsBlend') },
             { id: 'webgl_materials_dissolve', name: 'Dissolve Effect', category: 'materials', component: () => import('./WebGLMaterialsDissolve') },
             { id: 'webgl_materials_gradient', name: 'Gradient Materials', category: 'materials', component: () => import('./WebGLMaterialsGradient') },
             { id: 'webgl_materials_parallax', name: 'Parallax Mapping', category: 'materials', component: () => import('./WebGLMaterialsParallax') },
+            { id: 'webgl_materials_variations_basic', name: 'Material Variations Basic', category: 'materials', component: () => import('./WebGLMaterialsVariationsBasic') },
+            { id: 'webgl_materials_variations_lambert', name: 'Material Variations Lambert', category: 'materials', component: () => import('./WebGLMaterialsVariationsLambert') },
+            { id: 'webgl_materials_variations_phong', name: 'Material Variations Phong', category: 'materials', component: () => import('./WebGLMaterialsVariationsPhong') },
+            { id: 'webgl_materials_variations_standard', name: 'Material Variations Standard', category: 'materials', component: () => import('./WebGLMaterialsVariationsStandard') },
+            { id: 'webgl_materials_variations_physical', name: 'Material Variations Physical', category: 'materials', component: () => import('./WebGLMaterialsVariationsPhysical') },
+            { id: 'webgl_materials_variations_toon', name: 'Material Variations Toon', category: 'materials', component: () => import('./WebGLMaterialsVariationsToon') },
+            { id: 'webgl_materials_variations', name: 'Material Types Showcase', category: 'materials', component: () => import('./WebGLMaterialsVariations') },
+            { id: 'webgl_refraction', name: 'Refraction CubeCamera', category: 'materials', component: () => import('./WebGLRefraction') },
         ]
     },
     {
@@ -323,6 +342,16 @@ export const categories: CategoryEntry[] = [
             { id: 'webgl_texture_projection', name: 'Texture Projection', category: 'textures', component: () => import('./WebGLTextureProjection') },
             { id: 'webgl_texture_packing', name: 'Texture Packing', category: 'textures', component: () => import('./WebGLTexturePacking') },
             { id: 'webgl_texture_mipmaps', name: 'Texture Mipmaps', category: 'textures', component: () => import('./WebGLTextureMipmaps') },
+            { id: 'webgl_texture_canvas', name: 'Canvas Texture', category: 'textures', component: () => import('./WebGLTextureCanvas') },
+            { id: 'webgl_texture_filters', name: 'Texture Filters', category: 'textures', component: () => import('./WebGLTextureFilters') },
+            { id: 'webgl_texture_anisotropy', name: 'Anisotropy', category: 'textures', component: () => import('./WebGLTextureAnisotropy') },
+            { id: 'webgl_texture_from_buffers', name: 'Texture from Buffers (DataTexture)', category: 'textures', component: () => import('./WebGLTextureFromBuffers') },
+            { id: 'webgl_textures_primitives', name: 'Textures on Primitives', category: 'textures', component: () => import('./WebGLTexturesPrimitives') },
+            { id: 'webgl_textures_envmap', name: 'Env Map (CubeCamera)', category: 'textures', component: () => import('./WebGLTexturesEnvmap') },
+            { id: 'webgl_textures_rotate', name: 'Texture Rotation', category: 'textures', component: () => import('./WebGLTexturesRotate') },
+            { id: 'webgl_textures_checker', name: 'Checker (Anisotropy)', category: 'textures', component: () => import('./WebGLTexturesChecker') },
+            { id: 'webgl_textures_displacement', name: 'Displacement Map', category: 'textures', component: () => import('./WebGLTexturesDisplacement') },
+            { id: 'webgl_textures_gradients', name: 'Gradient Textures', category: 'textures', component: () => import('./WebGLTexturesGradients') },
         ]
     },
     {
@@ -342,6 +371,7 @@ export const categories: CategoryEntry[] = [
             { id: 'webgl_clipping_intersection', name: 'Clipping Intersection', category: 'clipping', component: () => import('./WebGLClippingIntersection') },
             { id: 'webgl_clipping_intersect', name: 'Clipping Plane Intersect', category: 'clipping', component: () => import('./WebGLClippingIntersect') },
             { id: 'webgl_clipping_stencil', name: 'Clipping Stencil', category: 'clipping', component: () => import('./WebGLClippingStencil') },
+            { id: 'webgl_stencil_buffer', name: 'Stencil Buffer Portal', category: 'clipping', component: () => import('./WebGLStencilBuffer') },
         ]
     },
     {
@@ -350,6 +380,7 @@ export const categories: CategoryEntry[] = [
         demos: [
             { id: 'webgl_wireframes', name: 'Wireframes', category: 'wireframes', component: () => import('./WebGLWireframes') },
             { id: 'webgl_wireframes_solid', name: 'Wireframes Solid', category: 'wireframes', component: () => import('./WebGLWireframesSolid') },
+            { id: 'webgl_wireframe', name: 'Wireframe Torus Knot', category: 'wireframes', component: () => import('./WebGLWireframe') },
         ]
     },
     {
@@ -381,6 +412,8 @@ export const categories: CategoryEntry[] = [
             { id: 'webgl_particles_confetti', name: 'Confetti Physics', category: 'particles', component: () => import('./WebGLParticlesConfetti') },
             { id: 'webgl_particles_liquid', name: 'Liquid Simulation (SPH)', category: 'particles', component: () => import('./WebGLParticlesLiquid') },
             { id: 'webgl_particles_gravity_well', name: 'Gravity Well Attractors', category: 'particles', component: () => import('./WebGLParticlesGravityWell') },
+            { id: 'webgl_particles_waves', name: 'Particle Wave Grid', category: 'particles', component: () => import('./WebGLParticlesWaves') },
+            { id: 'webgl_particles_dynamic', name: 'Dynamic Particles (Bounce)', category: 'particles', component: () => import('./WebGLParticlesDynamic') },
         ]
     },
     {
@@ -419,6 +452,7 @@ export const categories: CategoryEntry[] = [
             { id: 'webgl_lights', name: 'Physical Lights', category: 'lights', component: () => import('./WebGLLights') },
             { id: 'webgl_lights_rectarea', name: 'RectArea Lights', category: 'lights', component: () => import('./WebGLLightsRectArea') },
             { id: 'webgl_lights_spotlight', name: 'Spotlight', category: 'lights', component: () => import('./WebGLLightsSpotlight') },
+            { id: 'webgl_lights_spotlights', name: 'Multiple Spotlights', category: 'lights', component: () => import('./WebGLLightsSpotlights') },
             { id: 'webgl_lightprobe', name: 'Light Probe', category: 'lights', component: () => import('./WebGLLightprobe') },
             { id: 'webgl_lights_hemisphere', name: 'Hemisphere Light', category: 'lights', component: () => import('./WebGLLightsHemisphere') },
             { id: 'webgl_lights_hemisphere2', name: 'Hemisphere Light (Full)', category: 'lights', component: () => import('./WebGLLightsHemisphere2') },
@@ -432,6 +466,7 @@ export const categories: CategoryEntry[] = [
             { id: 'webgl_lights_soft_shadow', name: 'Soft Shadows', category: 'lights', component: () => import('./WebGLLightsSoftShadow') },
             { id: 'webgl_light_area', name: 'Area Light', category: 'lights', component: () => import('./WebGLLightArea') },
             { id: 'webgl_light_volumetric', name: 'Volumetric Light', category: 'lights', component: () => import('./WebGLLightVolumetric') },
+            { id: 'webgl_lightprobe_cubecamera', name: 'LightProbe CubeCamera', category: 'lights', component: () => import('./WebGLLightProbeCubeCamera') },
             { id: 'webgl_light_ies', name: 'IES Light Profile', category: 'lights', component: () => import('./WebGLLightIES') },
         ]
     },
@@ -449,6 +484,7 @@ export const categories: CategoryEntry[] = [
             { id: 'webgl_multiple_cameras', name: 'Multiple Cameras (Split Screen)', category: 'cameras', component: () => import('./WebGLMultipleCameras') },
             { id: 'webgl_camera_path', name: 'Camera Path', category: 'cameras', component: () => import('./WebGLCameraPath') },
             { id: 'webgl_camera_zoom', name: 'Camera Zoom vs Dolly', category: 'cameras', component: () => import('./WebGLCameraZoom') },
+            { id: 'webgl_multiple_views', name: 'Multiple Views (Split Screen)', category: 'cameras', component: () => import('./WebGLMultipleViews') },
         ]
     },
     {
@@ -486,6 +522,7 @@ export const categories: CategoryEntry[] = [
             { id: 'webgl_loader_gltf_variants', name: 'GLTF Variants', category: 'loaders', component: () => import('./WebGLLoaderGLTFVariants') },
             { id: 'webgl_loader_gltf_compressed', name: 'GLTF Compressed', category: 'loaders', component: () => import('./WebGLLoaderGLTFCompressed') },
             { id: 'webgl_loader_gltf_lights', name: 'GLTF Lights (KHR_lights_punctual)', category: 'loaders', component: () => import('./WebGLLoaderGLTFLights') },
+            { id: 'webgl_loader_gltf_browser', name: 'GLTF Model Browser', category: 'loaders', component: () => import('./GLTF') },
             { id: 'webgl_loader_texture_basis', name: 'Texture Basis (Compression)', category: 'loaders', component: () => import('./WebGLLoaderTextureBasis') },
         ]
     },
@@ -541,6 +578,12 @@ export const categories: CategoryEntry[] = [
             { id: 'webgl_shader_hue_saturation', name: 'Hue/Saturation', category: 'postprocessing', component: () => import('./WebGLShaderHueSaturation') },
             { id: 'webgl_postprocessing_bloom_emissive', name: 'Bloom Emissive', category: 'postprocessing', component: () => import('./WebGLPostprocessingBloomEmissive') },
             { id: 'webgl_postprocessing_bloom_advanced', name: 'Bloom Advanced (Selective)', category: 'postprocessing', component: () => import('./WebGLPostprocessingBloomAdvanced') },
+            { id: 'webgl_postprocessing_sobel', name: 'Sobel Edge Detection', category: 'postprocessing', component: () => import('./WebGLPostprocessingSobel') },
+            { id: 'webgl_postprocessing_ssaa', name: 'SSAA Supersampling', category: 'postprocessing', component: () => import('./WebGLPostprocessingSSAA') },
+            { id: 'webgl_postprocessing_masking', name: 'Masking / CopyShader', category: 'postprocessing', component: () => import('./WebGLPostprocessingMasking') },
+            { id: 'webgl_postprocessing_unreal_bloom', name: 'Unreal Bloom (Emissive)', category: 'postprocessing', component: () => import('./WebGLPostprocessingUnrealBloom') },
+            { id: 'webgl_postprocessing_dof2', name: 'Depth of Field (BokehPass)', category: 'postprocessing', component: () => import('./WebGLPostprocessingDOF2') },
+            { id: 'webgl_postprocessing_screenspace', name: 'Screenspace Distortion', category: 'postprocessing', component: () => import('./WebGLPostprocessingScreenspace') },
         ]
     },
     {
@@ -558,6 +601,7 @@ export const categories: CategoryEntry[] = [
             { id: 'webgl_shaders_ocean', name: 'Shaders Ocean', category: 'shaders', component: () => import('./WebGLShaderOcean') },
             { id: 'webgl_tonemapping', name: 'Tone Mapping', category: 'shaders', component: () => import('./WebGLShaderTonemapping') },
             { id: 'webgl_shaders_noise', name: 'Simplex Noise Shader', category: 'shaders', component: () => import('./WebGLShadersNoise') },
+            { id: 'webgl_shaders', name: 'Glowing Circle Shader', category: 'shaders', component: () => import('./WebGLShaders') },
         ]
     },
     {
@@ -624,6 +668,7 @@ export const categories: CategoryEntry[] = [
             { id: 'webgl_interactive_voxels', name: 'Voxel Builder', category: 'interactive', component: () => import('./WebGLInteractiveVoxels') },
             { id: 'webgl_interactive_draggablecubes', name: 'Draggable Cubes', category: 'interactive', component: () => import('./WebGLInteractiveDrag') },
             { id: 'webgl_interactive_pick', name: 'Object Picking', category: 'interactive', component: () => import('./WebGLInteractivePick') },
+            { id: 'webgl_raycaster', name: 'Raycaster Spheres', category: 'interactive', component: () => import('./WebGLRaycaster') },
         ]
     },
     {
@@ -633,6 +678,7 @@ export const categories: CategoryEntry[] = [
             { id: 'webgl_sprites', name: 'Sprites', category: 'sprites', component: () => import('./WebGLSprites') },
             { id: 'webgl_sprites_billboard', name: 'Billboard Sprites', category: 'sprites', component: () => import('./WebGLSpritesBillboard') },
             { id: 'webgl_sprites_scene', name: 'Sprites Scene', category: 'sprites', component: () => import('./WebGLSpritesNodes') },
+            { id: 'webgl_sprites_all', name: 'Sprites Showcase', category: 'sprites', component: () => import('./WebGLSpritesAll') },
         ]
     },
     {
@@ -710,6 +756,7 @@ export const categories: CategoryEntry[] = [
         demos: [
             { id: 'webgl_point_cloud', name: 'Point Cloud', category: 'point_cloud', component: () => import('./WebGLPointCloud') },
             { id: 'webgl_point_cloud_animated', name: 'Point Cloud Animated', category: 'point_cloud', component: () => import('./WebGLPointCloudAnimated') },
+            { id: 'webgl_pointcloud', name: 'Point Cloud (100k Random)', category: 'point_cloud', component: () => import('./WebGLPointCloud2') },
         ]
     },
     {
@@ -730,6 +777,9 @@ export const categories: CategoryEntry[] = [
             { id: 'webgl_shader_fresnel_cube', name: 'Fresnel Shader (Cube)', category: 'custom_shader', component: () => import('./WebGLShaderFresnelCube') },
             { id: 'webgl_shader_glow', name: 'Glow Effect', category: 'custom_shader', component: () => import('./WebGLShaderGlow') },
             { id: 'webgl_shader_hologram', name: 'Hologram Shader', category: 'custom_shader', component: () => import('./WebGLShaderHologram') },
+            { id: 'webgl_shaders2', name: 'Shader: FBM Noise', category: 'custom_shader', component: () => import('./WebGLShaders2') },
+            { id: 'webgl_shaders3', name: 'Shader: Ray March SDF', category: 'custom_shader', component: () => import('./WebGLShaders3') },
+            { id: 'webgl_shaders4', name: 'Shader: Voronoi Noise', category: 'custom_shader', component: () => import('./WebGLShaders4') },
         ]
     },
     {
@@ -826,6 +876,10 @@ export const categories: CategoryEntry[] = [
             { id: 'webgl_advanced_fog', name: 'Volumetric Fog', category: 'advanced', component: () => import('./WebGLAdvancedFog') },
             { id: 'webgl_advanced_film', name: 'Film Grain', category: 'advanced', component: () => import('./WebGLAdvancedFilm') },
             { id: 'webgl_advanced_halftone', name: 'Halftone', category: 'advanced', component: () => import('./WebGLAdvancedHalftone') },
+            { id: 'webgl_tonemapping_reinhard', name: 'Reinhard Tone Mapping', category: 'advanced', component: () => import('./WebGLTonemappingReinhard') },
+            { id: 'webgl_performance_doublesided', name: 'Double-Sided Performance', category: 'advanced', component: () => import('./WebGLPerformanceDoublesided') },
+            { id: 'webgl_performance_static', name: 'Static Instanced (10k)', category: 'advanced', component: () => import('./WebGLPerformanceStatic') },
+            { id: 'webgl_marching_cubes', name: 'Marching Cubes', category: 'advanced', component: () => import('./WebGLMarchingCubes') },
         ]
     },
     {

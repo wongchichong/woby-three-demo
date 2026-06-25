@@ -337,6 +337,7 @@ export const categories: CategoryEntry[] = [
             { id: 'webgl_loader_texture_exr', name: 'EXR Texture', category: 'textures', component: () => import('./WebGLLoaderTextureEXR') },
             { id: 'webgl_loader_texture_hdr', name: 'HDR Texture', category: 'textures', component: () => import('./WebGLLoaderTextureHDR') },
             { id: 'webgl_loader_texture_dds', name: 'DDS Texture', category: 'textures', component: () => import('./WebGLLoaderTextureDDS') },
+            { id: 'webgl_loader_texture_tga', name: 'TGA Texture', category: 'textures', component: () => import('./WebGLLoaderTextureTGA') },
             { id: 'webgl_texture_uv', name: 'UV Mapping', category: 'textures', component: () => import('./WebGLTextureUV') },
             { id: 'webgl_texture_offset', name: 'Texture Offset', category: 'textures', component: () => import('./WebGLTextureOffset') },
             { id: 'webgl_texture_projection', name: 'Texture Projection', category: 'textures', component: () => import('./WebGLTextureProjection') },
@@ -881,6 +882,7 @@ export const categories: CategoryEntry[] = [
             { id: 'webgl_performance_doublesided', name: 'Double-Sided Performance', category: 'advanced', component: () => import('./WebGLPerformanceDoublesided') },
             { id: 'webgl_performance_static', name: 'Static Instanced (10k)', category: 'advanced', component: () => import('./WebGLPerformanceStatic') },
             { id: 'webgl_marching_cubes', name: 'Marching Cubes', category: 'advanced', component: () => import('./WebGLMarchingCubes') },
+            { id: 'webgl_multiple_rendertargets', name: 'Multiple Render Targets (MRT)', category: 'advanced', component: () => import('./WebGLMultipleRendertargets') },
         ]
     },
     {

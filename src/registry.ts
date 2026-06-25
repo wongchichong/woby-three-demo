@@ -443,6 +443,7 @@ export const categories: CategoryEntry[] = [
             { id: 'webgl_shadows_bias', name: 'Shadow Bias', category: 'shadows', component: () => import('./WebGLShadowsBias') },
             { id: 'webgl_shadows_contact_soft', name: 'Soft Contact Shadows', category: 'shadows', component: () => import('./WebGLShadowsContactSoft') },
             { id: 'webgl_shadow_pcss', name: 'PCSS Soft Shadows', category: 'shadows', component: () => import('./WebGLShadowPCSS') },
+            { id: 'webgl_shadowmap_pcss', name: 'Shadowmap PCSS', category: 'shadows', component: () => import('./WebGLShadowmapPCSS') },
             { id: 'webgl_shadow_vsm', name: 'VSM Shadows', category: 'shadows', component: () => import('./WebGLShadowVSM') },
         ]
     },

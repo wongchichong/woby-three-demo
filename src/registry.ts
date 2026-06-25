@@ -339,6 +339,7 @@ export const categories: CategoryEntry[] = [
             { id: 'webgl_loader_texture_dds', name: 'DDS Texture', category: 'textures', component: () => import('./WebGLLoaderTextureDDS') },
             { id: 'webgl_loader_texture_tga', name: 'TGA Texture', category: 'textures', component: () => import('./WebGLLoaderTextureTGA') },
             { id: 'webgl_loader_texture_ktx2', name: 'KTX2 Texture (Basis)', category: 'textures', component: () => import('./WebGLLoaderTextureKTX2') },
+            { id: 'webgl_loader_texture_webp', name: 'WebP Texture', category: 'textures', component: () => import('./WebGLLoaderTextureWebP') },
             { id: 'webgl_texture_uv', name: 'UV Mapping', category: 'textures', component: () => import('./WebGLTextureUV') },
             { id: 'webgl_texture_offset', name: 'Texture Offset', category: 'textures', component: () => import('./WebGLTextureOffset') },
             { id: 'webgl_texture_projection', name: 'Texture Projection', category: 'textures', component: () => import('./WebGLTextureProjection') },

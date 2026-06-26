@@ -590,6 +590,10 @@ export const categories: CategoryEntry[] = [
             { id: 'webgl_postprocessing_unreal_bloom', name: 'Unreal Bloom (Emissive)', category: 'postprocessing', component: () => import('./WebGLPostprocessingUnrealBloom') },
             { id: 'webgl_postprocessing_dof2', name: 'Depth of Field (BokehPass)', category: 'postprocessing', component: () => import('./WebGLPostprocessingDOF2') },
             { id: 'webgl_postprocessing_screenspace', name: 'Screenspace Distortion', category: 'postprocessing', component: () => import('./WebGLPostprocessingScreenspace') },
+            { id: 'webgl_postprocessing_backgrounds', name: 'Backgrounds (Clear+Texture+Cube)', category: 'postprocessing', component: () => import('./WebGLPostprocessingBackgrounds') },
+            { id: 'webgl_postprocessing_rgb_halftone', name: 'RGB Halftone', category: 'postprocessing', component: () => import('./WebGLPostprocessingRGBHalftone') },
+            { id: 'webgl_postprocessing_procedural', name: 'Procedural (Fullscreen Shader)', category: 'postprocessing', component: () => import('./WebGLPostprocessingProcedural') },
+            { id: 'webgl_postprocessing_unreal_bloom_selective', name: 'Unreal Bloom (Selective Layers)', category: 'postprocessing', component: () => import('./WebGLPostprocessingUnrealBloomSelective') },
         ]
     },
     {

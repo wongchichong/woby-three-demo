@@ -1,29 +1,29 @@
 /** @jsxImportSource woby */
-import * as THREE from 'three'
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
-import { GUI } from 'three/examples/jsm/libs/lil-gui.module.min.js'
+// https://threejs.org/examples/#webgl_animation_locomotive
 
-let _cleanupFn: (() => void) | null = null
+import * as THREE from 'three'
+import { GUI } from 'three/examples/jsm/libs/lil-gui.module.min.js'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+
+let _cleanupFn: (() => void) | undefined
 
 const init3D = (container: HTMLElement) => {
-    if (_cleanupFn) { _cleanupFn(); _cleanupFn = null }
-
-    const W = container.clientWidth || window.innerWidth
-    const H = container.clientHeight || window.innerHeight
-
-    const renderer = new THREE.WebGLRenderer({ antialias: true })
-    renderer.setPixelRatio(window.devicePixelRatio)
-    renderer.setSize(W, H)
-    renderer.shadowMap.enabled = true
-    container.appendChild(renderer.domElement)
+    if (_cleanupFn) { _cleanupFn(); _cleanupFn = undefined }
 
     const scene = new THREE.Scene()
     scene.background = new THREE.Color(0xa0a0a0)
     scene.fog = new THREE.Fog(0xa0a0a0, 10, 50)
 
-    const hemiLight = new THREE.HemisphereLight(0xffffff, 0x8d8d8d, 3)
-    hemiLight.position.set(0, 20, 0)
-    scene.add(hemiLight)
+    const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 1, 100)
+    camera.position.set(1, 2, -3)
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true })
+    renderer.setPixelRatio(window.devicePixelRatio)
+    renderer.setSize(container.clientWidth, container.clientHeight)
+    renderer.shadowMap.enabled = true
+    container.appendChild(renderer.domElement)
+
+    scene.add(new THREE.HemisphereLight(0xffffff, 0x8d8d8d, 3))
 
     const dirLight = new THREE.DirectionalLight(0xffffff, 3)
     dirLight.position.set(-3, 10, -10)
@@ -38,10 +38,6 @@ const init3D = (container: HTMLElement) => {
     ground.receiveShadow = true
     scene.add(ground)
 
-    const camera = new THREE.PerspectiveCamera(45, W / H, 1, 100)
-    camera.position.set(1, 2, -3)
-    camera.lookAt(0, 1, 0)
-
     const clock = new THREE.Clock()
     let mixer: THREE.AnimationMixer | null = null
     let model: THREE.Object3D | null = null
@@ -50,7 +46,6 @@ const init3D = (container: HTMLElement) => {
     let walkAction: THREE.AnimationAction | null = null
     let runAction: THREE.AnimationAction | null = null
     let actions: THREE.AnimationAction[] = []
-    let gui: GUI | null = null
     let singleStepMode = false
     let sizeOfNextStep = 0
     const crossFadeControls: any[] = []
@@ -76,8 +71,7 @@ const init3D = (container: HTMLElement) => {
     }
 
     const setWeight = (a: THREE.AnimationAction | null, w: number) => {
-        if (!a) return
-        a.enabled = true; a.setEffectiveTimeScale(1); a.setEffectiveWeight(w)
+        if (!a) return; a.enabled = true; a.setEffectiveTimeScale(1); a.setEffectiveWeight(w)
     }
     const activateAllActions = () => {
         setWeight(idleAction, settings['modify idle weight'])
@@ -91,28 +85,22 @@ const init3D = (container: HTMLElement) => {
         else actions.forEach(a => { a.paused = true })
     }
     const toSingleStepMode = () => {
-        actions.forEach(a => { a.paused = false })
-        singleStepMode = true
+        actions.forEach(a => { a.paused = false }); singleStepMode = true
         sizeOfNextStep = settings['modify step size']
     }
     const executeCrossFade = (s: THREE.AnimationAction | null, e: THREE.AnimationAction | null, duration: number) => {
-        if (!s || !e) return
-        setWeight(e, 1); e.time = 0; s.crossFadeTo(e, duration, true)
+        if (!s || !e) return; setWeight(e, 1); e.time = 0; s.crossFadeTo(e, duration, true)
     }
     const synchronizeCrossFade = (s: THREE.AnimationAction | null, e: THREE.AnimationAction | null, duration: number) => {
         if (!mixer || !s) return
         const onLoopFinished = (event: any) => {
-            if (event.action === s) {
-                mixer!.removeEventListener('loop', onLoopFinished)
-                executeCrossFade(s, e, duration)
-            }
+            if (event.action === s) { mixer!.removeEventListener('loop', onLoopFinished); executeCrossFade(s, e, duration) }
         }
         mixer.addEventListener('loop', onLoopFinished)
     }
-    const prepareCrossFade = (s: THREE.AnimationAction | null, e: THREE.AnimationAction | null, defaultDuration: number) => {
-        const duration = settings['use default duration'] ? defaultDuration : settings['set custom duration']
-        singleStepMode = false
-        actions.forEach(a => { a.paused = false })
+    const prepareCrossFade = (s: THREE.AnimationAction | null, e: THREE.AnimationAction | null, def: number) => {
+        const duration = settings['use default duration'] ? def : settings['set custom duration']
+        singleStepMode = false; actions.forEach(a => { a.paused = false })
         if (s === idleAction) executeCrossFade(s, e, duration)
         else synchronizeCrossFade(s, e, duration)
     }
@@ -129,9 +117,8 @@ const init3D = (container: HTMLElement) => {
     new GLTFLoader().load('models/gltf/Soldier.glb', (gltf) => {
         model = gltf.scene
         scene.add(model)
-        model.traverse((object: any) => { if (object.isMesh) object.castShadow = true })
+        model.traverse((o: any) => { if (o.isMesh) o.castShadow = true })
         skeleton = new THREE.SkeletonHelper(model); skeleton.visible = false; scene.add(skeleton)
-
         mixer = new THREE.AnimationMixer(model)
         idleAction = mixer.clipAction(gltf.animations[0])
         walkAction = mixer.clipAction(gltf.animations[3])
@@ -139,14 +126,15 @@ const init3D = (container: HTMLElement) => {
         actions = [idleAction, walkAction, runAction]
         activateAllActions()
 
-        gui = new GUI()
-        const f1 = gui.addFolder('Visibility'), f2 = gui.addFolder('Activation/Deactivation'),
-            f3 = gui.addFolder('Pausing/Stepping'), f4 = gui.addFolder('Crossfading'),
-            f5 = gui.addFolder('Blend Weights'), f6 = gui.addFolder('General Speed')
+        const panel = new GUI()
+        const f1 = panel.addFolder('Visibility'), f2 = panel.addFolder('Activation/Deactivation')
+        const f3 = panel.addFolder('Pausing/Stepping'), f4 = panel.addFolder('Crossfading')
+        const f5 = panel.addFolder('Blend Weights'), f6 = panel.addFolder('General Speed')
         f1.add(settings, 'show model').onChange((v: boolean) => { if (model) model.visible = v })
         f1.add(settings, 'show skeleton').onChange((v: boolean) => { if (skeleton) skeleton.visible = v })
         f2.add(settings, 'deactivate all'); f2.add(settings, 'activate all')
-        f3.add(settings, 'pause/continue'); f3.add(settings, 'make single step'); f3.add(settings, 'modify step size', 0.01, 0.1, 0.001)
+        f3.add(settings, 'pause/continue'); f3.add(settings, 'make single step')
+        f3.add(settings, 'modify step size', 0.01, 0.1, 0.001)
         crossFadeControls.push(f4.add(settings, 'from walk to idle'))
         crossFadeControls.push(f4.add(settings, 'from idle to walk'))
         crossFadeControls.push(f4.add(settings, 'from walk to run'))
@@ -159,9 +147,15 @@ const init3D = (container: HTMLElement) => {
         f1.open(); f2.open(); f3.open(); f4.open(); f5.open(); f6.open()
     })
 
-    let animId = 0
+    const onResize = () => {
+        const w = container.clientWidth; const h = container.clientHeight
+        camera.aspect = w / h; camera.updateProjectionMatrix()
+        renderer.setSize(w, h)
+    }
+    window.addEventListener('resize', onResize)
+
+    let raf = 0
     const animate = () => {
-        animId = requestAnimationFrame(animate)
         if (mixer && idleAction && walkAction && runAction) {
             settings['modify idle weight'] = idleAction.getEffectiveWeight()
             settings['modify walk weight'] = walkAction.getEffectiveWeight()
@@ -172,31 +166,18 @@ const init3D = (container: HTMLElement) => {
             mixer.update(delta)
         }
         renderer.render(scene, camera)
+        raf = requestAnimationFrame(animate)
     }
     animate()
 
-    const onResize = () => {
-        const nW = container.clientWidth || window.innerWidth
-        const nH = container.clientHeight || window.innerHeight
-        camera.aspect = nW / nH
-        camera.updateProjectionMatrix()
-        renderer.setSize(nW, nH)
-    }
-    window.addEventListener('resize', onResize)
-
     _cleanupFn = () => {
-        cancelAnimationFrame(animId)
+        cancelAnimationFrame(raf)
         window.removeEventListener('resize', onResize)
-        gui?.destroy()
         renderer.dispose()
         if (container.contains(renderer.domElement)) container.removeChild(renderer.domElement)
     }
 }
 
-export const WebGLAnimationLocomotive = () => (
-    <div style="width:100%;height:100%;position:relative">
-        <div ref={(el: HTMLElement | null) => { if (el) init3D(el) }} style="width:100%;height:100%" />
-    </div>
-)
-
-export default WebGLAnimationLocomotive
+export default function WebGLAnimationLocomotive() {
+    return <div ref={(el) => { if (el) init3D(el) }} class="w-full h-full" />
+}

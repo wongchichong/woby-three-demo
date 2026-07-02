@@ -7,14 +7,14 @@ import { KTX2Loader } from 'three/examples/jsm/loaders/KTX2Loader.js'
 import { MeshoptDecoder } from 'three/examples/jsm/libs/meshopt_decoder.module.js'
 import { RoomEnvironment } from 'three/examples/jsm/environments/RoomEnvironment.js'
 import { GUI } from 'three/examples/jsm/libs/lil-gui.module.min.js'
+import { Timer } from 'three/examples/jsm/misc/Timer.js'
 
 let _cleanupFn: (() => void) | null = null
 
 const init3D = (container: HTMLElement) => {
     if (_cleanupFn) { _cleanupFn(); _cleanupFn = null }
 
-    const timer = new THREE.Timer()
-    timer.connect(document)
+    const timer = new Timer()
 
     const w = container.clientWidth
     const h = container.clientHeight
